@@ -172,7 +172,6 @@ def model_training(
         train_objectives=[(train_dataloader, train_loss)],
         # evaluator = None,
         evaluator=ir_evaluator_n2c2_dev,
-        output_path_ignore_not_empty=True,
         optimizer_params={
             'lr': 1e-4,
             'eps': 1e-6,
@@ -206,14 +205,17 @@ if __name__ == "__main__":
 
     parser.add_argument(
         '--train_batch_size',
+        type=int,
         help='the training batch size, typically, larger is better',
         required=True)
 
     parser.add_argument('--epoch_size',
+                        type=int,
                         help='The number of epoch size',
                         required=True)
 
     parser.add_argument('--samples_per_label',
+                        type=int,
                         help='The number of instances for each concept. ',
                         required=True)
 
