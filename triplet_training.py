@@ -172,7 +172,6 @@ def model_training(
         train_objectives=[(train_dataloader, train_loss)],
         # evaluator = None,
         evaluator=ir_evaluator_n2c2_dev,
-        output_path_ignore_not_empty=True,
         optimizer_params={
             'lr': 1e-4,
             'eps': 1e-6,
