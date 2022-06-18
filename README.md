@@ -54,14 +54,7 @@ concept_normalizer = SentenceTransformer(model_name_or_path)
 ### Code to train sentence-transformer using triplet network
 * code to run the triplet network for the concept normalization tasks using ncbi dataset:
 ```
-python3.7 triplet_training.py \
---model bert-base-uncased \
---input_path data/input_path/train.tsv \
---evaluator_path data/evaluator_path/ \
---train_batch_size 1024 \
---samples_per_label 3 \
---epoch_size 3.0 \
---output_path /path/to/output/
+python triplet_training.py --model bert-base-uncased --input_path data/input_path/train.tsv --evaluator_path data/evaluator_path/ --train_batch_size 1024 --samples_per_label 3 --epoch_size 3 --output_path Triplet-Search-ConNorm/data/
 ```
 
 
