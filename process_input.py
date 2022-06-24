@@ -74,7 +74,7 @@ def dev_evaluator():
             ontology[int(doc_id.split("_")[1])][0]
             for doc_id in relevant_docs[qid]
         ]
-        print(item, text)
+#         print(item, text)
 
 
 dev_evaluator()
