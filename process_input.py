@@ -2,7 +2,7 @@ import read_files as read
 
 
 def process_ontology():
-    ontology = read.read_from_tsv("/content/Triplet-Search-ConNorm/data/ontology/ontology.tsv")
+    ontology = read.read_from_tsv("Triplet-Search-ConNorm/data/ontology/ontology.tsv")
     concept_mentions = {}
 
     for idx, [synonym, concept] in enumerate(ontology):
@@ -23,9 +23,9 @@ def process_ontology():
 
     synonyms = [[item] for item in synonyms]
 
-    read.save_in_tsv("/content/Triplet-Search-ConNorm/data/ontology/ontology_synonyms.tsv", synonyms)
-    read.save_in_json("/content/Triplet-Search-ConNorm/data/ontology/ontology_concept", concepts)
-    read.save_in_json("/content/Triplet-Search-ConNorm/data/ontology/ontology_concept_synonyms_idx",
+    read.save_in_tsv("Triplet-Search-ConNorm/data/ontology/ontology_synonyms.tsv", synonyms)
+    read.save_in_json("Triplet-Search-ConNorm/data/ontology/ontology_concept", concepts)
+    read.save_in_json("Triplet-Search-ConNorm/data/ontology/ontology_concept_synonyms_idx",
                       concept_mention_idx)
 
 
@@ -34,14 +34,14 @@ process_ontology()
 
 def dev_evaluator():
 
-    ontology = read.read_from_tsv("/content/Triplet-Search-ConNorm/data/ontology/ontology_synonyms.tsv")
+    ontology = read.read_from_tsv("Triplet-Search-ConNorm/data/ontology/ontology_synonyms.tsv")
 
     cui_mention_idx = read.read_from_json(
-        "/content/Triplet-Search-ConNorm/data/ontology/ontology_concept_synonyms_idx")
+        "Triplet-Search-ConNorm/data/ontology/ontology_concept_synonyms_idx")
 
     corpus = {"doc_" + str(id): item[0] for id, item in enumerate(ontology)}
 
-    read.save_in_json("/content/Triplet-Search-ConNorm/data/evaluator_path/corpus", corpus)
+    read.save_in_json("Triplet-Search-ConNorm/data/evaluator_path/corpus", corpus)
 
     doc_id2mesh_all = {}
     mesh2doc_id_all = {}
@@ -53,7 +53,7 @@ def dev_evaluator():
         }
         mesh2doc_id_all.update(mesh2doc_id)
 
-    dev_input = read.read_from_tsv("/content/Triplet-Search-ConNorm/data/input_raw/dev.tsv")
+    dev_input = read.read_from_tsv("Triplet-Search-ConNorm/data/input_raw/dev.tsv")
     mentions = [item[0] for item in dev_input]
 
     query = {
@@ -65,8 +65,8 @@ def dev_evaluator():
         "q_" + str(id): mesh2doc_id_all[item[1]]
         for id, item in enumerate(dev_input) if item[1] != "CUI-less"
     }
-    read.save_in_json("/content/Triplet-Search-ConNorm/data/evaluator_path/dev_queries", query)
-    read.save_in_json("/content/Triplet-Search-ConNorm/data/evaluator_path/dev_relevant_docs", relevant_docs)
+    read.save_in_json("Triplet-Search-ConNorm/data/evaluator_path/dev_queries", query)
+    read.save_in_json("Triplet-Search-ConNorm/data/evaluator_path/dev_relevant_docs", relevant_docs)
 
     for qid, item in query.items():
 
